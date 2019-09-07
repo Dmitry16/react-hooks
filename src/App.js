@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useForm from './useForm';
+import Hello from './Hello';
 
 const App = () => {
 
@@ -13,8 +14,12 @@ const App = () => {
     console.log('renderrrrr!');
   }, [values.email, values.password]);
 
+  const [ showHello, setHello ] = useState(true);
+
   return (
     <div>
+      <button onClick={ () => setHello(!showHello) }>toggle hello</button>
+      { showHello && <Hello /> }
       <input name='email' value={values.email}
         onChange={ handleChange }>
       </input>

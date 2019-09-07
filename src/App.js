@@ -10,16 +10,26 @@ const App = () => {
     password: 'q'
   });
 
+  const onMouseMove = e => {
+    console.log(e);
+  }
+  
   useEffect(() => {
     console.log('renderrrrr!');
-  }, [values.email, values.password]);
+    window.addEventListener('mousemove', onMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+    }
+
+  }, []);
 
   const [ showHello, setHello ] = useState(true);
 
   return (
     <div>
-      <button onClick={ () => setHello(!showHello) }>toggle hello</button>
-      { showHello && <Hello /> }
+      {/* <button onClick={ () => setHello(!showHello) }>toggle hello</button> */}
+      {/* { showHello && <Hello /> } */}
       <input name='email' value={values.email}
         onChange={ handleChange }>
       </input>

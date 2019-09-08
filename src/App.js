@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import useForm from './useForm';
 import useFetch from './useFetch';
 // import Hello from './Hello';
@@ -27,6 +27,8 @@ const App = () => {
         // }, []);
         
   // const [ showHello, setHello ] = useState(true);
+  const inputRef = useRef();
+
   const [ counter, setCounter ] = useState(77);
         
   const { data, loading } = useFetch(`http://numbersapi.com/${counter}/trivia`);
@@ -37,8 +39,9 @@ const App = () => {
       {/* { showHello && <Hello /> } */}
       <div>{ loading ? 'loading...' : data }</div>
       <div>counter: { counter }</div>
+      <button onClick={ () => inputRef.current.focus() }>inputRef</button>
       <button onClick={ () => setCounter(c => c + 1) }>inc</button>
-      <input name='email' value={values.email}
+      <input ref={inputRef} name='email' value={values.email}
         onChange={ handleChange }>
       </input>
       <input name='firstname' value={values.firstname}

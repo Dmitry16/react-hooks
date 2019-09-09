@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 
 function reducer(state, action) {
 
@@ -15,13 +15,20 @@ function reducer(state, action) {
 
 const App = () => {
 
-  const [counter, dispatch] = useReducer(reducer, 0);
+  const [{ todos }, dispatch] = useReducer( reducer, {todos: []} );
+  const [text, setText] = useState("");
+
+  console.log('todos::', todos)
 
   return (
     <div>
-      <div>counter: { counter }</div>
-      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <div>Todos counter: { }</div>
+      <form>
+        <input type="text" value={text} onChange={ e => e.target.value }/>
+      </form>
+      <pre>
+        { JSON.stringify(todos, null, 2) }
+      </pre>
     </div>
   )
 }

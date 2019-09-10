@@ -1,55 +1,30 @@
-import React, { useReducer, useState } from 'react';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Index } from './pages';
+import { About } from './pages/about';
 
-function reducer(state, action) {
-
-  switch (action.type) {
-    case 'add-todo':
-      return {
-        todos: [...state.todos, { todo: action.payload, completed: false }]
-      };
-    case 'toggle-todo':
-      return {
-        todos: state.todos.map((t,idx) => {
-          return idx === action.payload ? {...t, completed: !t.completed} : t
-        })
-      }
-    default:
-      return state;
-  }
-}
-
-const App = () => {
-
-  const initialState = { todos: [] }; 
-  const [{ todos }, dispatch] = useReducer( reducer, initialState );
-  const [text, setText] = useState("");
-
-  console.log('todos::', todos)
+const AppRouter = () => {
 
   return (
-    <div>
-      <div>Todos counter: { todos.length }</div>
-      <form onSubmit={ e => {
-        e.preventDefault();
-        dispatch({type: 'add-todo', payload: text});
-        setText('');
-      } }>
-        <input type="text" value={text} onChange={ e => setText(e.target.value) }/>
-      </form>
+    <Router>
       <div>
-        {todos.map((t,idx) => (
-          <div onClick={() => dispatch({type: 'toggle-todo', payload: idx})}
-            style={{textDecoration: t.completed ? 'line-through' : ''}}
-          >
-            { t.todo }
-          </div>
-        ))}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Route path="/" exact component={Index} />
+        <Route path="/about" exact component={About} />
       </div>
-      <pre>
-        { JSON.stringify(todos, null, 2) }
-      </pre>
-    </div>
+    </Router>
   )
+
 }
 
-export default App;
+export default AppRouter;

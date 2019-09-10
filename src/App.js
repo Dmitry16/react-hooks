@@ -20,7 +20,8 @@ function reducer(state, action) {
 
 const App = () => {
 
-  const [{ todos }, dispatch] = useReducer( reducer, {todos: []} );
+  const initialState = { todos: [] }; 
+  const [{ todos }, dispatch] = useReducer( reducer, initialState );
   const [text, setText] = useState("");
 
   console.log('todos::', todos)

@@ -4,20 +4,15 @@ function reducer(state, action) {
 
   switch (action.type) {
     case 'add-todo':
-      console.log('sdfds::::', action.text)
       return {
         todos: [...state.todos, { todo: action.text, completed: false }]
       };
     case 'toggle-todo':
       return {
-        todos: [
-          ...state.todos,
-          state.todos.map((t,idx) => {
-            return idx === action.idx ? !t.completed : t
+          todos: state.todos.map((t,idx) => {
+            return idx === action.idx ? {...t, completed: !t.completed} : t
           })
-        ]
-      };
-
+        }
     default:
       return state;
   }

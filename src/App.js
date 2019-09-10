@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Index } from './pages';
 import { About } from './pages/about';
+import { UserContext } from './UserContext';
 
 const AppRouter = () => {
 
@@ -18,9 +19,10 @@ const AppRouter = () => {
             </li>
           </ul>
         </nav>
-
-        <Route path="/" exact component={Index} />
-        <Route path="/about" exact component={About} />
+        <UserContext.Provider value="hello from context!">
+          <Route path="/" exact component={Index} />
+          <Route path="/about" exact component={About} />
+        </UserContext.Provider>
       </div>
     </Router>
   )

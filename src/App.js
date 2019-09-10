@@ -9,10 +9,10 @@ function reducer(state, action) {
       };
     case 'toggle-todo':
       return {
-          todos: state.todos.map((t,idx) => {
-            return idx === action.idx ? {...t, completed: !t.completed} : t
-          })
-        }
+        todos: state.todos.map((t,idx) => {
+          return idx === action.idx ? {...t, completed: !t.completed} : t
+        })
+      }
     default:
       return state;
   }
@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div>
-      <div>Todos counter: { }</div>
+      <div>Todos counter: { todos.length }</div>
       <form onSubmit={ e => {
         e.preventDefault();
         dispatch({type: 'add-todo', text});
@@ -38,7 +38,7 @@ const App = () => {
       <div>
         {todos.map((t,idx) => (
           <div onClick={() => dispatch({type:'toggle-todo', idx})}
-            style={{textDecoration:'line-through'}}
+            style={{textDecoration: t.completed ? 'line-through' : ''}}
           >
             { t.todo }
           </div>
